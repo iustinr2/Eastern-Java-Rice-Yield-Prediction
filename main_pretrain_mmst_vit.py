@@ -574,7 +574,7 @@ def main(args):
         if misc.is_main_process():
             print(
                 f"Epoch {epoch + 1}/{args.epochs} - "
-                f"lr: {train_stats.get('lr', 0.0):.6e} | "
+                f"lr: {train_stats.get('lr', 0.0):.8f} | "
                 f"loss: {train_stats.get('loss', 0.0):.6f}",
                 flush=True,
             )
