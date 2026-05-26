@@ -1,8 +1,12 @@
 # Eastern-Java-Rice-Yield-Prediction
 
-DRAFT: quick rundown of how to run the code.
+DRAFT README - THIS IS NOT THE FINAL VERSION
 
-First, download the dataset from Hugging Face, and follow all file-reorganizing instructions as large Sentinel-2 files were uploaded on a yearly basis instead of at once (to avoid errors associated with runtimes of multiple days).
+Draft explanation of how to run the code:
+
+First, download the full dataset from Hugging Face. Follow all file-reorganizing instructions as large Sentinel-2 files were uploaded on a yearly basis instead of at once (to avoid errors associated with runtimes of multiple days).
+
+A separate Hugging Face repository containing processed files has also been updated. You do not have to download the files from this repository as they will be generated when you run the code. Nevertheless, if you want to skip straight to testing the fine-tuning file, it is possible to do so without running the entire pipeline. In that case, it is advised to follow the instructions and download files from the separate Hugging Face repository.
 
 Then, download the code, and run in order starting from config -> dataset -> loss -> util. The function of all files will be explained thoroughly in the final README file. After the files in the util folder have been run, I suggest running the remaining files in the order below:
 
