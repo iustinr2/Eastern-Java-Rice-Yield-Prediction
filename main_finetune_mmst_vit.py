@@ -31,7 +31,7 @@ split_mode = "standard"
 # True (regency embeddings) or False (ablation)
 # Keep False for spatial split mode!
 use_regency_embedding = True
-output_root = Path("/vol/home/s3881946/Downloads/MMST-ViT-main/multiseed_finetune_results_temporal")
+output_root = Path("/vol/home/s3881946/Downloads/MMST-ViT-main/multiseed_finetune_results_random_split")
 
 experiment_name = "finetuning_experiment"
 holdout_year = 2025
