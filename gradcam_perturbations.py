@@ -20,8 +20,10 @@ from torch.utils.data import DataLoader
 
 repo_root = Path("/vol/home/s3881946/Downloads/MMST-ViT-main")
 gradcam_file = repo_root / "create_gradcam_map.py"
-checkpoint_root = repo_root / "RESULTS/multiseed_finetune_results_temporal"
-output_dir = repo_root / "perturbation_outputs_temporal"
+
+# Rename to root of intended experiment output file
+checkpoint_root = repo_root / "RESULTS/multiseed_finetune_results_random_split"
+output_dir = repo_root / "perturbation_outputs_random_split"
 
 experiment_name = "perturbations"
 seed_values = [0, 1, 2, 3, 4, 5, 42, 123, 777, 2025]
