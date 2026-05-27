@@ -24,8 +24,11 @@ from torch.utils.data import DataLoader
 
 repo_root = Path(os.environ.get("mmst_repo_root", Path(__file__).resolve().parent)).expanduser().resolve()
 finetune_file = Path(os.environ.get("mmst_finetune_file", repo_root / "main_finetune_mmst_vit.py")).expanduser()
-checkpoint_root = Path(os.environ.get("mmst_checkpoint_root", repo_root / "RESULTS/multiseed_finetune_results_temporal")).expanduser()
-output_dir = Path(os.environ.get("mmst_gradcam_output_dir", repo_root / "gradcam_outputs_temporal")).expanduser()
+
+# Rename to output root of the intended fine-tune experiment
+# This can be the output root of the random split, temporal, or spatial experiment
+checkpoint_root = Path(os.environ.get("mmst_checkpoint_root", repo_root / "RESULTS/multiseed_finetune_results_random_split")).expanduser()
+output_dir = Path(os.environ.get("mmst_gradcam_output_dir", repo_root / "gradcam_outputs_random_split")).expanduser()
 
 experiment_name = "create_gradcam"
 seed_values = [0, 1, 2, 3, 4, 5, 42, 123, 777, 2025]
@@ -1216,12 +1219,8 @@ def run_gradcam():
         "combined_tile_stats": combined_stats,
         "manifest": manifest,
         "files": {
-            "combined_heatmap": str(combined_dir / "combined_heatmap_2x2.png"),
-            "combined_labelled_heatmap": str(combined_dir / "combined_labelled_heatmap_2x2.png"),
-            "combined_sentinel_background": str(combined_dir / "combined_sentinel_background_2x2.png"),
-            "combined_overlay_on_sentinel": str(combined_dir / "combined_overlay_on_sentinel_2x2.png"),
-            "combined_labelled_overlay_on_sentinel": str(combined_dir / "combined_labelled_overlay_on_sentinel_2x2.png"),
-            "combined_npy": str(combined_dir / "combined_raw_normalized_tile_maps.npy"),
+            "combined_heatmap": str(combined_dir / "combined_heatmap.png"),
+            "combined_labelled_overlay_on_sentinel": str(combined_dir / "sentinel_overlay_heatmap.png"),
         },
     }
 
