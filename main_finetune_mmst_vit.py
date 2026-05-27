@@ -25,12 +25,15 @@ import torch.nn.functional as f
 import xarray as xr
 from torch.utils.data import DataLoader, Dataset
 
-experiment_name = "standard_random_grouped"
+# "standard" (random split), "temporal", or "spatial"
 split_mode = "standard"
-use_regency_embedding = False
+
+# True (regency embeddings) or False (ablation)
+# Keep False for spatial split mode!
+use_regency_embedding = True
 output_root = Path("/vol/home/s3881946/Downloads/MMST-ViT-main/multiseed_finetune_results_temporal")
 
-experiment_name = "standard_random_grouped"
+experiment_name = "finetuning_experiment"
 holdout_year = 2025
 spatial_split_seed = 42
 seeds = [0, 1, 2, 3, 4, 5, 42, 123, 777, 2025]
@@ -44,7 +47,7 @@ def quiet_call(fn, *args, **kwargs):
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
         return fn(*args, **kwargs)
 
-overwrite_existing = env_bool("mmst_overwrite_existing", "0")
+overwrite_existing = env_bool("mmst_overwrite_existing", "1")
 run_rf_baseline = env_bool("mmst_run_rf_baseline", "1")
 run_cnn_baseline = env_bool("mmst_run_cnn_baseline", "1")
 baseline_cnn_image_size = int(os.environ.get("mmst_baseline_cnn_image_size", "64"))
@@ -100,8 +103,6 @@ def clean_legacy_columns(df: pd.DataFrame) -> pd.DataFrame:
             renamed[c] = "padi_production_tons"
         elif lc in {"beras", "beras_production", "beras_production_tons", "produksi beras", "produksi_beras"}:
             renamed[c] = "beras_production_tons"
-        elif lc in {"luas panen", "luas_panen", "harvested_area", "harvested_area_ha", "luas panen (ha)"}:
-            renamed[c] = "harvested_area_ha"
         elif lc in {"tl_pct", "tr_pct", "bl_pct", "br_pct", "total_tile_pct"}:
             renamed[c] = lc
     if renamed:
@@ -1416,8 +1417,8 @@ def main() -> None:
         json.dump(results, f, indent=2)
     with open(output_root / "summary_raw_mean_std.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
-    save_raw_summary_csv(summary, output_root / "summary_table_spatial.csv")
-    save_combined_prediction_table(results, output_root / "validation_predictions_spatial.csv")
+    save_raw_summary_csv(summary, output_root / "summary_table.csv")
+    save_combined_prediction_table(results, output_root / "validation_predictions.csv")
     print_summary(summary)
 
 if __name__ == "__main__":
