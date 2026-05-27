@@ -793,11 +793,8 @@ def run_perturbation():
         "combined_tile_stats": combined_stats,
         "manifest": manifest,
         "files": {
-            "combined_heatmap": str(combined_dir / "combined_perturbation_heatmap_2x2.png"),
-            "combined_sentinel_background": str(combined_dir / "combined_sentinel_background_2x2.png"),
-            "combined_overlay_on_sentinel": str(combined_dir / "combined_overlay_on_sentinel_2x2.png"),
-            "combined_labelled_overlay_on_sentinel": str(combined_dir / "combined_labelled_overlay_on_sentinel_2x2.png"),
-            "combined_npy": str(combined_dir / "combined_raw_normalized_perturbation_tile_maps.npy"),
+            "combined_heatmap": str(combined_dir / "perturbation_heatmap.png"),
+            "combined_labelled_overlay_on_sentinel": str(combined_dir / "sentinel_overlay_perturbations.png"),
         },
     }
 
